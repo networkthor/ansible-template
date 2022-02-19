@@ -1,0 +1,32 @@
+global
+  log /dev/log  local0
+  log /dev/log  local1 notice
+{% if haproxy_socket != '' %}
+  stats socket {{ haproxy_socket }} level admin
+{% endif %}
+{% if haproxy_chroot != '' %}
+  chroot {{ haproxy_chroot }}
+{% endif %}
+  user {{ haproxy_user }}
+  group {{ haproxy_group }}
+  daemon
+{% for global_var in haproxy_global_vars %}
+  {{ global_var }}
+{% endfor %}
+
+defaults
+  log global
+  mode  http
+  option  httplog
+  option  dontlognull
+
+
+frontend web-frontend
+  bind *:80
+  mode http
+  default_backend web-backend
+
+backend web-backend
+  balance roundrobin
+  server host1 192.168.80.110:80 check
+  server control 192.168.80.100:80 check
