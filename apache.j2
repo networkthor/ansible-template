@@ -1,0 +1,13 @@
+# {{ ansible_managed }}
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@{{ ansible_fqdn }}
+    ServerName {{ ansible_fqdn }}
+    DocumentRoot /var/www/html/{{ ansible_hostname }}/
+    
+    <Directory /var/www/html/{{ ansible_hostname }}/>
+       Options +Indexes +FollowSymlinks +Includes
+       Order allow,deny
+       Allow from all
+    </Directory>
+</VirtualHost>
