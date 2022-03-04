@@ -1,0 +1,6 @@
+# System Hardware Information
+HOSTNAME = hostname
+BIOSVERSION = biosversion
+MEMORY = memory
+SDA_DISK_SIZE = sda_disk_size
+NVME_DISK_SIZE = nvme_disk_size
